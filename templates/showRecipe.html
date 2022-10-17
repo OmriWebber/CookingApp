@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    {% include ['head.html'] %}
+    <body>
+        
+        {% include ['navbar.html'] %}
+        {% include ['addContactModal.html'] %}
+        {% include ['confirmModal.html'] %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <center><h3>Cooking App</h3></center>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm" style="margin-top:5%">
+                    <table id="recipeTable" class="table">
+                        <tr>
+                            <th><b>Title</b></th>
+                            <th><b>Category</b></th>
+                            <th><b>Ingredients</b></th>
+                            <th><b>Prep Time</b></th>
+                            <th><b>Cook Time</b></th>
+                            <td><input id="searchRecipes" onkeyup="searchFunction()" type="input" placeholder="Search for recipes.."></td>
+                        </tr>
+                        <tr>
+                            <TD class="title">{{recipe.title}}</TD>
+                            <TD>{{recipe.Category}}</TD>
+                            <TD>{{recipe.Ingredients}}</TD>
+                            <TD>{{recipe.PrepTime}}</TD>
+                            <TD>{{recipe.CookTime}}</TD>
+                            <TD class="action-buttons">
+                                <a class="btn btn-info" href="{{url_for('showRecipe', conid=recipe.recipeID)}}">Show</a>
+                                <button class="delete-contact-button btn btn-danger" data-title={{recipe.title}} data-id={{recipe.recipeID}} data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
+                            </TD>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    </body>
+</html>

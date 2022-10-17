@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  {% include ['head.html'] %}
+  <body>
+    <div class="container">
+      {% if msg %}
+      <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-bs-dismiss="alert" aria-label="close" style="text-decoration: none;color: red;font-size: initial;">{{msg}} &times;</a>
+      </div>
+      {% endif %}
+      <div class="row">
+        <form method="post">
+          <h4>Enter Passcode</h4><br>
+          <input class="col-4" type="text" placeholder="Username" name="username" id="username" required><br>\
+          <input class="col-4" type="password" placeholder="Password" name="password" id="password" required><br>
+          <input class="col-4 btn btn-success" type="submit" value="Log In">
+        </form>
+      </div>
+
+      <div class="row">
+        <div class="col-12 align-self-center">
+          <h5>Need an Account?</h5>
+          <a class="col-4 btn btn-primary" href="/auth/register">Sign up for a new Account</a>
+        </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </body>
+
+</html>
+
+

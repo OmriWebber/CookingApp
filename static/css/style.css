@@ -1,0 +1,93 @@
+@font-face {
+    font-family: AfterNight;
+    src: url('../fonts/AfterNight.ttf');
+}
+
+.navbar {
+    background-color: grey;
+}
+
+.navbar-brand {
+    font-size: 30px;
+    font-family: AfterNight;
+}
+
+body {
+    font-family: Montserrat;
+}
+
+.user-container {
+    display: inline-block;
+    width: 40px;
+}
+
+.user-bg {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin: -20px auto 0 auto;
+    background-color: rgb(0, 195, 255);
+}
+
+.user-letter {
+    color: white !important;
+    text-align: center;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.spacer {
+    width: 60px;
+}
+
+.line {
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+    width: 1px;
+    background-color: grey;
+}
+
+.logout {
+    color: rgb(168, 5, 5);
+    font-weight: 600;
+}
+
+.btn-submit {
+    float: right;
+}
+
+.form-group {
+    padding: 5px;
+}
+
+.form-input-title {
+    padding: 5px;
+    margin: 0px;
+}
+
+h3 {
+    margin-top: 50px;
+}
+
+.action-buttons .btn {
+    margin: 3px;
+    padding: 8px 23px;
+}
+
+.float-right {
+    float: right;
+}
+
+.modal-body {
+    padding: 50px;
+}
+
+.modal-footer {
+    justify-content: space-between !important;
+}
+
+th {
+    font-weight: 400;
+}
