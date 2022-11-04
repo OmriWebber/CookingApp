@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    {% include ['head.html'] %}
+    <body>
+        {% include ['navbar.html'] %}
+        {% include ['confirmModal.html'] %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <center><h3>Create Recipe</h3></center>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm" style="margin-top:5%">
+                    <form id="createRecipeForm" action="{{ url_for('createRecipe')}}" method="post" enctype="multipart/form-data">
+                        <div class="form-group row">
+                            <div class="col-8">
+                                <p class="form-input-title">Title</p>
+                                <input class="form-control" type="text" name="title">
+                            </div>
+                            <div class="col-4">
+                                <p class="form-input-title">Category</p>
+                                <input class="form-control" type="text" name="category">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <p class="form-input-title">Ingredients <span class="totalSubtitle">Total #:  <input type="text" id="numOfIngredients" name="count"></span></p>
+                                <ul id="ingredientsList" class="form-control" type="text" name="ingredientsList">
+                                </ul>
+                                <button class="btn btn-light" type="button" id="addIngredientButton">Add Ingredient</button>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <p class="form-input-title">Method</p>
+                                <textarea class="form-control" name="method" rows="8" type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-between">
+                            <div class="col-4">
+                                <p class="form-input-title">Add Image</p>
+                                <input type="file" name="recipeImage" class="recipeImageUpload">
+                            </div>
+                            <div class="col-6 row justify-content-between">
+                                <div class="col-6">
+                                    <p class="form-input-title">Prep Time</p>
+                                    <input type="text" name="prepTime" placeholder="Enter Time"></input>
+                                </div>
+                                <div class="col-6">
+                                    <p class="form-input-title">Cook Time</p>
+                                    <input type="text" name="prepTime" placeholder="Enter Time"></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <button class="col-12 btn btn-success" id="recipeSubmitFormButton" onClick="submitForm(this.form)" type="submit">Create Recipe</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/createRecipe.js') }}"></script>
+
+    </body>
+</html>
