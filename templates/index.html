@@ -4,12 +4,19 @@
     <body>
         
         {% include ['navbar.html'] %}
-        {% include ['addContactModal.html'] %}
         {% include ['confirmModal.html'] %}
+        <div class="container-fluid hero">
+            <center>
+                <h2>Search for a Recipe<br>or<br>Create your own</h2><br><br>
+                <input class="btn btn-light" id="searchRecipes" onkeyup="searchFunction()" type="input" placeholder="Search for recipes..">
+                <a class="btn btn-success" href="{{ url_for('createRecipe') }}">Create a Recipe</a><br><br>
+                <a class="btn btn-light" href="{{ url_for('savedRecipes') }}">View Saved Recipes</a>
+            </center>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <center><h3>Cooking App</h3></center>
+                    <center><h3>Features Recipes</h3></center>
                 </div>
             </div>
             <div class="row">
@@ -21,17 +28,19 @@
                             <th><b>Ingredients</b></th>
                             <th><b>Prep Time</b></th>
                             <th><b>Cook Time</b></th>
-                            <td><input id="searchRecipes" onkeyup="searchFunction()" type="input" placeholder="Search for recipes.."></td>
+                            <td></td>
                         </tr>
                         {% for cl in recipes %}
                         <tr>
                             <TD class="title">{{cl.title}}</TD>
-                            <TD>{{cl.Category}}</TD>
-                            <TD>{{cl.Ingredients}}</TD>
-                            <TD>{{cl.PrepTime}}</TD>
-                            <TD>{{cl.CookTime}}</TD>
+                            <TD>{{cl.category}}</TD>
+                            <TD>
+                                {{cl.ingredients|length}}
+                            </TD>
+                            <TD>{{cl.prepTime}}</TD>
+                            <TD>{{cl.cookTime}}</TD>
                             <TD class="action-buttons">
-                                <a class="btn btn-info" href="{{url_for('showRecipe', conid=cl.recipeID)}}">Show</a>
+                                <a class="btn btn-info" href="{{url_for('showRecipe', id=cl.recipeID)}}">Show</a>
                                 <button class="delete-contact-button btn btn-danger" data-title={{cl.title}} data-id={{cl.recipeID}} data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
                             </TD>
                         </tr>
