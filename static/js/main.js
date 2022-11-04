@@ -51,3 +51,4 @@ $( document ).ready(function() {
     user_name = $('.user-name').text().slice(1,2);
     $('.user-letter').text(user_name.toUpperCase());
 });
+
