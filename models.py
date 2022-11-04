@@ -11,8 +11,9 @@ class Users(UserMixin, db.Model):
     __tablename__ = "Users"
     id = Column(Integer, primary_key=True)
     username = Column(String(50), nullable=False)
-    password = Column(String(10), nullable=False)
-    recipes = relationship("savedRecipes")
+    password = Column(String(256), nullable=False)
+    email = Column(String(100), nullable=False)
+    recipes = relationship("savedUserRecipes")
     is_Admin = Column(Boolean, nullable=False, default=False)
     dateCreated = Column(DateTime, default=datetime.utcnow)
     
@@ -23,46 +24,47 @@ class Users(UserMixin, db.Model):
 # Recipes Table Model
 class Recipes(db.Model):
     __tablename__= "Recipes"
-    recipeID = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     title = Column(String(50), nullable=False)
     method = Column(String(500), nullable=True)
     imageURL = Column(String(200), nullable=True)
     category = Column(String(50), nullable=True)
     prepTime = Column(String(20), nullable=True)
     cookTime = Column(String(20), nullable=True)
-    ingredients = relationship("recipeIngredients")
+    ingredients = relationship("Ingredients", backref='recipe')
     
     def __repr__(self):
-        template = '{0.recipeID} {0.title}'
+        template = '{0.id} {0.title} {0.ingredients}'
         return template.format(self)
 
-# recipeIngredients Table Model
-class recipeIngredients(db.Model):
-    __tablename__= "recipeIngredients"
-    id = Column(Integer, primary_key=True)
-    recipeID = Column(Integer, ForeignKey("Recipes.recipeID"))
-    
-    def __repr__(self):
-        template = '{0.recipeID} {0.name}'
-        return template.format(self)
-    
+
 # Ingredients Table Model
 class Ingredients(db.Model):
     __tablename__= "Ingredients"
-    ingredientID = Column(Integer, primary_key=True)
+    ingredient_id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=True)
-    categor = Column(String(100), nullable=True)
+    recipe_id = Column(Integer, ForeignKey("Recipes.id"))
+    # measurementUnit
+    # measurementQuntity
     
     def __repr__(self):
-        template = '{0.recipeID} {0.title}'
+        template = '{0.ingredient_id} {0.name}'
         return template.format(self)
     
     
+class shoppingList(db.Model):
+    __tablename__ = "shoppingList"
+    id = Column(Integer, primary_key=True)
+    ingredient = Column(String(100), nullable=False)
+    quantity = Column(String(100), nullable=True)
     
+    def __repr__(self):
+        template = '{0.id} {0.ingredient} {0.quantity}'
+        return template.format(self)
     
 # SavedRecipes Table Model
-class savedRecipes(db.Model):
-    __tablename__= "savedRecipes"
+class savedUserRecipes(db.Model):
+    __tablename__= "savedUserRecipes"
     id = Column(Integer, primary_key=True)
     userID = Column(Integer, ForeignKey("Users.id"))
     RecipeID = Column(Integer)
