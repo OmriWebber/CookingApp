@@ -7,15 +7,15 @@
       <div class="collapse navbar-collapse d-flex" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
           <a class="nav-link" href="{{ url_for('index') }}">Recipes</a>
-          <a class="nav-link" href="{{ url_for('index') }}">Saved Recipes</a>
-          <a class="nav-link" href="{{ url_for('index') }}">Meal Planner</a>
-          <a class="nav-link" href="{{ url_for('index') }}">Shopping List</a>
+          <a class="nav-link" href="{{ url_for('index') }}"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+          <a class="nav-link" href="{{ url_for('index') }}"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
           {% if current_user.is_authenticated %}
             <span class="spacer"><span class="line"></span></span>
-            <a class="nav-link user-name" href="{{ url_for('profile') }}"><span class="user-container"><span class="user-bg"><p class="user-letter"></p></span></span> {{ user.name }}</a>
+            <a class="nav-link user-name" href="{{ url_for('profile') }}"><span class="user-container"><span class="user-bg"><p class="user-letter"></p></span></span> {{ user.username }}</a>
             <a class="nav-link logout" href="{{ url_for('auth.logout') }}">Logout</a>
           {% endif %}
           {% if not current_user.is_authenticated %}
+            <span class="spacer"><span class="line"></span></span>
             <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
             <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
           {% endif %}
