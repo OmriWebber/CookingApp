@@ -4,12 +4,29 @@
 }
 
 .navbar {
-    background-color: grey;
+    color: black;
+    background-color: rgb(230, 230, 230);
+    filter: drop-shadow(0px 00px 50px grey);
+    height: 100px;
+}
+
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+    color: grey;
 }
 
 .navbar-brand {
-    font-size: 30px;
+    font-size: 40px;
     font-family: AfterNight;
+    color: black;
+    transition: all 0.1s ease-in;
+}
+
+.navbar-brand:hover {
+    color: grey;
 }
 
 body {
@@ -71,6 +88,10 @@ h3 {
     margin-top: 50px;
 }
 
+h1,h2,h3,h4,h5 {
+    font-family: AfterNight;
+}
+
 .action-buttons .btn {
     margin: 3px;
     padding: 8px 23px;
@@ -90,4 +111,62 @@ h3 {
 
 th {
     font-weight: 400;
+}
+
+
+
+/* Fluid Container Styling */
+.hero {
+    padding: 100px 0 100px 0;
+    background-image: url('../img/hero.png');
+    background-size:100%;
+    color: white;
+}
+
+
+
+
+/* Login Styling */
+.login-container {
+    width: 50%;
+}
+
+.login-container h1 {
+    padding: 100px 0 50px 0;
+}
+
+.login-container .row {
+    margin-top: 10px;
+}
+
+.login-container .btn {
+    padding: 10px 0px;
+}
+
+.login-container .buttons {
+    margin-top:30px;
+}
+
+.login-container a.login {
+    padding: 10px 20px;
+}
+
+#ingredientsList {
+    list-style-type: none;
+}
+
+.ingredientItem input {
+    border: none;
+    padding: 10px;
+}
+
+#numOfIngredients {
+    float:right;
+    text-align: right;
+    padding: 0px 0px;
+    width: 30px;
+}
+
+.totalSubtitle {
+    float: right;
 }
