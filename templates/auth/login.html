@@ -2,27 +2,29 @@
 <html lang="en">
   {% include ['head.html'] %}
   <body>
-    <div class="container">
+    {% include ['navbar.html'] %}
+    <div class="container login-container">
       {% if msg %}
-      <div class="alert alert-danger alert-dismissible">
-        <a href="#" class="close" data-bs-dismiss="alert" aria-label="close" style="text-decoration: none;color: red;font-size: initial;">{{msg}} &times;</a>
-      </div>
+        <div class="alert alert-danger alert-dismissible">
+          <a href="#" class="close" data-bs-dismiss="alert" aria-label="close" style="text-decoration: none;color: red;font-size: initial;">{{msg}} &times;</a>
+        </div>
       {% endif %}
-      <div class="row">
-        <form method="post">
-          <h4>Enter Passcode</h4><br>
-          <input class="col-4" type="text" placeholder="Username" name="username" id="username" required><br>\
-          <input class="col-4" type="password" placeholder="Password" name="password" id="password" required><br>
-          <input class="col-4 btn btn-success" type="submit" value="Log In">
-        </form>
+        <div class="row justify-content-center">
+          <center><h1>Login</h1></center>
+          <form method="post">
+            <div class="row justify-content-center">
+              <input class="col-12 btn btn-light" type="text" placeholder="Username" name="username" id="username" required><br>
+            </div>
+            <div class="row justify-content-center">
+              <input class="col-12 btn btn-light" type="password" placeholder="Password" name="password" id="password" required><br>
+            </div>
+            <div class="row buttons justify-content-between">
+              <a class="col-4 btn btn-light" href="{{ url_for('auth.register') }}">Create Account</a>
+              <input class="col-4 col-offset-4 btn btn-success" type="submit" value="Log In">
+            </div>
+          </form>
+        </div>
       </div>
-
-      <div class="row">
-        <div class="col-12 align-self-center">
-          <h5>Need an Account?</h5>
-          <a class="col-4 btn btn-primary" href="/auth/register">Sign up for a new Account</a>
-        </div>
-        </div>
     </div>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
