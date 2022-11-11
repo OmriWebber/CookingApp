@@ -119,10 +119,45 @@ th {
 .hero {
     padding: 100px 0 100px 0;
     background-image: url('../img/hero.png');
-    background-size:100%;
+    background-size: cover;
+    
     color: white;
 }
 
+.recipeGrid {
+    --bs-gutter-y: 1.5rem;
+}
+
+.recipeGrid .container {
+    text-decoration: none;
+    color: black;
+    background-color: rgb(248, 248, 248);
+    display:block;
+    padding: 30px;
+    border: 4px solid rgb(228, 228, 228);
+    filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.123));
+    transition: 0.2s ease-in all;
+}
+
+.recipeGrid .container:hover {
+    background-color: rgb(228, 228, 228);
+}
+
+.recipeGrid .recipeTitle {
+    margin-top: 18px;
+}
+.recipeGrid .recipePrepTimeTitle {
+    font-size: 12px;
+}
+.recipeGrid .recipeCookTimeTitle {
+    font-size: 12px;
+}
+
+.recipeGrid .recipeCategory {
+    font-size: 14px;
+    margin-top: -10px;
+    color:rgba(0, 0, 0, 0.521)
+}
 
 
 
@@ -158,15 +193,98 @@ th {
 .ingredientItem input {
     border: none;
     padding: 10px;
+    width: 50% !important;
 }
 
 #numOfIngredients {
     float:right;
     text-align: right;
     padding: 0px 0px;
-    width: 30px;
+    width: 30px !important;
+    border: none;
 }
 
 .totalSubtitle {
     float: right;
 }
+
+.heroTag {
+    filter: drop-shadow(5px 5px 8px black);
+}
+
+.featuredRecipesTitle {
+    margin-bottom: 50px;
+}
+
+.showRecipe {
+    margin-top: 50px;
+}
+
+.showRecipe .recipeImage {
+    width: 100%;
+}
+
+.showRecipe .recipeIngredients {
+    margin-top: 30px;
+}
+
+.showRecipe .recipeMethod {
+    margin-top: 30px;
+}
+
+.recipeGrid .recipeImage {
+    width: 100%;
+}
+
+.recipeEdit {
+    display: none;
+}
+
+#editRecipeForm input {
+    width: 100%;
+}
+
+.alert {
+    margin-bottom: 0px;
+    animation: 1s ease 0s 1 slideInFromLeft;
+}
+
+.shoppingList {
+
+}
+
+.shoppingList .ingredient {
+    width: 100%;
+    margin: 10px;
+    list-style-type: none;
+    padding: 5px 15px;
+    background-color: rgba(0, 0, 0, 0.123)
+}
+
+.shoppingList .ingredient p {
+    height: 100%;
+    display: inline-block;
+    margin-top: 8px;
+    margin-bottom: 6px;
+}
+
+.shoppingList .ingredient .btn {
+    width: 100px;
+}
+
+.markUnDone {
+    display: none;
+}
+
+.markDone, .markUnDone {
+    float: right;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+      transform: translateX(20%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
