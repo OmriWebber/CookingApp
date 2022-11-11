@@ -4,37 +4,34 @@
     <body>
         
         {% include ['navbar.html'] %}
-        {% include ['addContactModal.html'] %}
         {% include ['confirmModal.html'] %}
         <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <center><h3>Cooking App</h3></center>
+            <div class="row showRecipe">
+                <div class="col-4">
+                    <img class="recipeImage" src="{{ url_for('static', filename=recipe.imageURL) }}">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm" style="margin-top:5%">
-                    <table id="recipeTable" class="table">
-                        <tr>
-                            <th><b>Title</b></th>
-                            <th><b>Category</b></th>
-                            <th><b>Ingredients</b></th>
-                            <th><b>Prep Time</b></th>
-                            <th><b>Cook Time</b></th>
-                            <td><input id="searchRecipes" onkeyup="searchFunction()" type="input" placeholder="Search for recipes.."></td>
-                        </tr>
-                        <tr>
-                            <TD class="title">{{recipe.title}}</TD>
-                            <TD>{{recipe.Category}}</TD>
-                            <TD>{{recipe.Ingredients}}</TD>
-                            <TD>{{recipe.PrepTime}}</TD>
-                            <TD>{{recipe.CookTime}}</TD>
-                            <TD class="action-buttons">
-                                <a class="btn btn-info" href="{{url_for('showRecipe', conid=recipe.recipeID)}}">Show</a>
-                                <button class="delete-contact-button btn btn-danger" data-title={{recipe.title}} data-id={{recipe.recipeID}} data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
-                            </TD>
-                        </tr>
-                    </table>
+                <div class="col-6">
+                    <h2>{{recipe.title}}</h2>
+                    
+                    <div class="row recipeIngredients">
+                        <p>Ingredients:</p>
+                        {% for ingredient in recipe.ingredients %}
+                            <p class="col-6">- {{ ingredient.name }}</p>
+                        {% endfor %}
+                        <a class="add-ingredients-to-shoppinglist-button btn btn-light" href="/addToShoppingList/{{ingredientIDs}}"><i class="fa fa-add"></i> Add Ingredients to Shopping List</a>
+
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="vstack gap-3">
+                        <a class="save-recipe-button btn btn-light" href="/saveRecipe/{{recipe.id}}"><i class="fa fa-floppy-disk"></i> Save Recipe</a>
+                        <a class="edit-recipe-button btn btn-success" href="/editRecipe/{{recipe.id}}"> <i class="fa fa-pencil"></i> Edit Recipe</a>
+                        <button class="delete-recipe-button btn btn-danger" data-title={{recipe.title}} data-id={{recipe.id}} data-bs-toggle="modal" data-bs-target="#confirmModal"><i class="fa fa-trash"></i> Delete Recipe</button>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <h3 class="recipeMethodTitle">Method</h3>
+                    <p class="recipeMethod">{{method}}</p>
                 </div>
             </div>
         </div>

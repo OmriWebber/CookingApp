@@ -1,6 +1,6 @@
 document.getElementById("addIngredientButton").onclick = function() {addIngredient()};
 
-var count = 0;
+var count = document.getElementById("numOfIngredients").value;
 function addIngredient(){
     count++;
     document.getElementById("numOfIngredients").value = count;

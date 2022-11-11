@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    {% include ['head.html'] %}
+    <body>
+        {% include ['navbar.html'] %}
+        {% include ['confirmModal.html'] %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <center><h3>My Recipes</h3></center>
+                </div>
+            </div>
+            <div class="row recipeGrid">
+                {% for recipe in recipes %}
+                    <div class="col-4">
+                        <a class="container" href="showRecipe/{{ recipe.id }}">
+                            <center>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <img class="recipeImage" src="{{ url_for('static', filename=recipe.imageURL) }}">
+                                        <h4 class="recipeTitle">{{ recipe.title }}</h4>
+                                        <p class="recipeCategory">{{recipe.category}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-6">
+                                        <p class="recipeIngredientsTitle">Ingredients:</p>
+                                        <p class="recipeIngredients">{{recipe.ingredients|length}}</p>
+                                    </div>
+                                    <div class="col align-self-center">
+                                        <p class="recipePrepTimeTitle">Prep Time:</p>
+                                        <p class="recipePrepTime">{{recipe.prepTime}}</p>
+                                    </div>
+                                    <div class="col align-self-end">
+                                        <p class="recipeCookTimeTitle">Cook Time:</p>
+                                        <p class="recipeCookTime">{{recipe.cookTime}}</p>
+                                    </div>
+                                </div>
+                            </center>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    </body>
+</html>
