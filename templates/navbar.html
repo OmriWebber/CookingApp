@@ -1,20 +1,30 @@
 <nav class="navbar sticky-top navbar-expand-md navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="{{ url_for('index') }}">{{name}}</a>
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              <div id="alert" class='alert alert-light' role="alert">
+                {% for message in messages %}
+                  {{ message }}
+                {% endfor %}
+              </div>
+          {% endif %}
+      {% endwith %}
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse d-flex" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="{{ url_for('index') }}">Recipes</a>
-          <a class="nav-link" href="{{ url_for('index') }}"><i class="fa fa-calendar" aria-hidden="true"></i></a>
-          <a class="nav-link" href="{{ url_for('index') }}"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
+          <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+          <a class="nav-link" href="{{ url_for('savedRecipes') }}">My Recipes</a>
+          <a class="nav-link" href="{{ url_for('mealPlanner') }}"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+          <a class="nav-link" href="{{ url_for('showShoppingList') }}"><i class="fa fa-list-ul" aria-hidden="true"></i></a>
           {% if current_user.is_authenticated %}
             <span class="spacer"><span class="line"></span></span>
             <a class="nav-link user-name" href="{{ url_for('profile') }}"><span class="user-container"><span class="user-bg"><p class="user-letter"></p></span></span> {{ user.username }}</a>
             <a class="nav-link logout" href="{{ url_for('auth.logout') }}">Logout</a>
-          {% endif %}
-          {% if not current_user.is_authenticated %}
+          {% else %}
             <span class="spacer"><span class="line"></span></span>
             <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
             <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
