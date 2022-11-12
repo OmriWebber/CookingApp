@@ -11,12 +11,43 @@
                 </div>
             </div>
             <div class="row">
+                <div id="demo-meal-planner" class="md-meal-planner-calendar"></div>
+
+                <div id="meal-planner-popup" class="md-meal-planner-popup">
+                    <div id="meal-type-segmented" class="mbsc-form-group">
+                        <center class="goToRecipe">
+                            <a class="btn btn-light" id="viewRecipe" href="#">View Recipe</a>
+                            <input type='hidden' id='meal-notes-input'/>
+                        </center>
+                    </div>
+                    <div class="mbsc-form-group">
+                        <div id="addRecipeDiv">
+                            <label>
+                                Search
+                                <input mbsc-input id="meal-name-input" />
+                            </label>
+                            <div id='searchResults'>
+                                {% for recipe in recipes %}
+                                    <div class="recipe row">
+                                        <p class="col recipeTitle">{{ recipe.title }}</p>
+                                        <span class="recipeIdTitle">Recipe ID: <span class='recipeId'>{{ recipe.id }}</span></span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mbsc-button-group">
+                        <button class="mbsc-button-block" id="meal-delete" mbsc-button data-color="danger" data-variant="outline">Delete meal</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='js/mobiscroll.jquery.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/mealPlanner.js') }}"></script>
 
     </body>
 </html>
