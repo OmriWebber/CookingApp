@@ -21,11 +21,11 @@ ckeditor = CKEditor(application)
 
 # If application detects rds database, use cloud database, if not use localhost
 if 'RDS_DB_NAME' in os.environ:
-    RDS_Connection_String = 'mysql://' + os.environ['RDS_USERNAME'] + ':',os.environ['RDS_PASSWORD']
+    RDS_Connection_String = 'mysql://' + os.environ['RDS_USERNAME'] + ':' + os.environ['RDS_PASSWORD'] + '@' + os.environ['RDS_HOSTNAME'] + ':' + os.environ['RDS_PORT'] + '/' + os.environ['RDS_DB_NAME']
+    print(RDS_Connection_String)
     application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password@cooking-app-database.ch0or1bnad8y.ap-southeast-2.rds.amazonaws.com:3306/cooking_app_db'
 else:
     application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost:3306/cookingapp"
-
 
 db.init_app(application)
 migrate = Migrate(application, db)
@@ -239,7 +239,8 @@ def editRecipe(id):
 @application.route("/mealPlanner")
 @login_required
 def mealPlanner():
-    return render_template('mealPlanner.html', user=current_user, name="Cooking App")
+    recipes = Recipes.query.all()
+    return render_template('mealPlanner.html', recipes=recipes, user=current_user, name="Cooking App")
 
 
 @application.route("/addToShoppingList/<ingredientIDs>")
