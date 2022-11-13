@@ -19,6 +19,7 @@ application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 ckeditor = CKEditor(application)
 
+print(os.environ)
 
 # If application detects rds database, use cloud database, if not use localhost
 if 'RDS_DB_NAME' in os.environ:
