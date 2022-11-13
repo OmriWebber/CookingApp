@@ -19,15 +19,14 @@ application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 ckeditor = CKEditor(application)
 
+
 # If application detects rds database, use cloud database, if not use localhost
 if 'RDS_DB_NAME' in os.environ:
-    RDS_Connection_String = 'mysql://' + os.environ['RDS_USERNAME'] + ':' + os.environ['RDS_PASSWORD'] + '@' + os.environ['RDS_HOSTNAME'] + ':' + os.environ['RDS_PORT'] + '/' + os.environ['RDS_DB_NAME']
-    print(RDS_Connection_String)
     print('TESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSET')
     application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password@cooking-app-database.ch0or1bnad8y.ap-southeast-2.rds.amazonaws.com:3306/cooking_app_db'
 else:
-    print('TESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSETTESTSETSETSETSETSETSETSETSETSET')
-    application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost:3306/cookingapp"
+    # application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost:3306/cookingapp"
+    application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password@cooking-app-database.ch0or1bnad8y.ap-southeast-2.rds.amazonaws.com:3306/cooking_app_db'
 
 db.init_app(application)
 migrate = Migrate(application, db)
