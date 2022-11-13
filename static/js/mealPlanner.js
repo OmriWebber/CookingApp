@@ -183,6 +183,7 @@ $(function () {
         calendar.setEvents(events);
     }, 'jsonp');
 
+
     var popup = $('#meal-planner-popup').mobiscroll().popup({
         display: 'bottom',
         contentPadding: false,

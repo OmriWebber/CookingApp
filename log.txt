@@ -1,3 +1,8 @@
 [2022-09-15 18:10:48.029139] Admin:1 deleted Omri:1
 [2022-10-13 09:16:56.874217] Admin:1 deleted Omri:1
 [2022-10-13 09:22:30.072184] Admin:1 deleted Omri:1
+[2022-11-04 19:13:20.388257] omri:1 deleted test:2
+[2022-11-04 19:13:23.858687] omri:1 deleted testest:3
+[2022-11-06 20:45:08.458788] omri:1 deleted test:7
+[2022-11-06 21:15:33.360939] omri:1 deleted actual test:6
+[2022-11-11 23:30:11.679747] omri:1 deleted testtest:3

@@ -1,0 +1,202 @@
+[
+    {
+        "start":"2022-11-06T23:00:00.000Z",
+        "end":"2022-11-06T23:15:00.000Z",
+        "title":"Waffles",
+        "resource":2,
+        "notes":1,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-06T23:00:00.000Z",
+        "end":"2022-11-06T23:15:00.000Z",
+        "title":"Pesto Pasta",
+        "resource":3,
+        "calories":530,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-06T23:00:00.000Z",
+        "end":"2022-11-06T23:15:00.000Z",
+        "title":"Cheese & Crackers",
+        "resource":5,
+        "calories":200,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-07T23:00:00.000Z",
+        "end":"2022-11-07T23:15:00.000Z",
+        "title":"Bacon Cheese Sandwich",
+        "resource":1,
+        "calories":370,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-07T23:00:00.000Z",
+        "end":"2022-11-07T23:15:00.000Z",
+        "title":"Burrito Bowl",
+        "resource":3,
+        "calories":580,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-07T23:00:00.000Z",
+        "end":"2022-11-07T23:15:00.000Z",
+        "title":"Homemade Pizza",
+        "resource":4,
+        "calories":600,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-07T23:00:00.000Z",
+        "end":"2022-11-07T23:15:00.000Z",
+        "title":"Popcorn",
+        "resource":5,
+        "calories":140,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-08T23:00:00.000Z",
+        "end":"2022-11-08T23:15:00.000Z",
+        "title":"Grilled Chicken Salad",
+        "resource":1,
+        "calories":320,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-08T23:00:00.000Z",
+        "end":"2022-11-08T23:15:00.000Z",
+        "title":"Pistachio Oat Bars",
+        "resource":2,
+        "calories":180,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-08T23:00:00.000Z",
+        "end":"2022-11-08T23:15:00.000Z",
+        "title":"Skirt Steak",
+        "resource":4,
+        "calories":560,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-08T23:00:00.000Z",
+        "end":"2022-11-08T23:15:00.000Z",
+        "title":"Crispy Baked Falafel",
+        "resource":5,
+        "calories":200,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-09T23:00:00.000Z",
+        "end":"2022-11-09T23:15:00.000Z",
+        "title":"Smashed Avocado Toast",
+        "resource":1,
+        "calories":300,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-09T23:00:00.000Z",
+        "end":"2022-11-09T23:15:00.000Z",
+        "title":"Tropical Smoothie Bowl",
+        "resource":2,
+        "calories":160,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-09T23:00:00.000Z",
+        "end":"2022-11-09T23:15:00.000Z",
+        "title":"Fish & Chips",
+        "resource":3,
+        "calories":650,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-09T23:00:00.000Z",
+        "end":"2022-11-09T23:15:00.000Z",
+        "title":"Pad Thai",
+        "resource":4,
+        "calories":440,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-10T23:00:00.000Z",
+        "end":"2022-11-10T23:15:00.000Z",
+        "title":"Blueberry Muffins",
+        "resource":2,
+        "calories":130,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-10T23:00:00.000Z",
+        "end":"2022-11-10T23:15:00.000Z",
+        "title":"Spicy Chicken Wrap",
+        "resource":3,
+        "calories":520,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-10T23:00:00.000Z",
+        "end":"2022-11-10T23:15:00.000Z",
+        "title":"Bananas & Peanut Butter",
+        "resource":5,
+        "calories":170,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-11T23:00:00.000Z",
+        "end":"2022-11-11T23:15:00.000Z",
+        "title":"Cauliflower Steaks",
+        "resource":2,
+        "calories":180,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-11T23:00:00.000Z",
+        "end":"2022-11-11T23:15:00.000Z",
+        "title":"Shrimp Saganaki ",
+        "resource":3,
+        "calories":550,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-11T23:00:00.000Z",
+        "end":"2022-11-11T23:15:00.000Z",
+        "title":"Meatballs & Rice",
+        "resource":4,
+        "calories":540,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-12T23:00:00.000Z",
+        "end":"2022-11-12T23:15:00.000Z",
+        "title":"Scrambled Eggs with Spinach",
+        "resource":1,
+        "calories":330,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-12T23:00:00.000Z",
+        "end":"2022-11-12T23:15:00.000Z",
+        "title":"Chicken Noodle Soup",
+        "resource":3,
+        "calories":500,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-12T23:00:00.000Z",
+        "end":"2022-11-12T23:15:00.000Z",
+        "title":"Baked Salmon with Garlic and Dijon",
+        "resource":4,
+        "calories":580,
+        "allDay":true
+    },
+    {
+        "start":"2022-11-12T23:00:00.000Z",
+        "end":"2022-11-12T23:15:00.000Z",
+        "title":"Classic Cheesecake",
+        "resource":5,
+        "calories":180,
+        "allDay":true
+    }
+]
