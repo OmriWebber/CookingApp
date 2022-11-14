@@ -33,6 +33,7 @@ else:
     # application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password@cooking-app-database.ch0or1bnad8y.ap-southeast-2.rds.amazonaws.com:3306/cooking_app_db'
     # application.config['SQLALCHEMY_DATABASE_URI'] = RDS_Connection_String
     
+    
 db.init_app(application)
 migrate = Migrate(application, db)
 
@@ -75,8 +76,6 @@ def populate():
         category = i['category']
         method = i['method']
         ingredients = i['ingredients']
-        
-        
         imageURL = i['imageURL']
         prepTime = i['prepTime']
         cookTime = i['cookTime']
@@ -164,12 +163,44 @@ def deleteRecipe(id):
     logThis("deleted", current_user.username, current_user.id, recipe.title, recipe.id)
     return redirect(url_for('index'))
 
+
 @application.route("/profile")
 @login_required
 def profile():
-    user = Users.query.filter_by(id=current_user.id).first()
+    skip = Users.query.filter(Users.id.in_([current_user.id]))
+    users = Users.query.except_(skip).all()
+    print(users)
+    return render_template('profile.html', user=current_user, user_list=users, name="Cooking App")
 
-    return render_template('profile.html', user=user, name="Cooking App")
+
+@application.route("/makeAdmin/<id>")
+@login_required
+def makeAdmin(id):
+    if current_user.is_Admin:
+        user = Users.query.filter_by(id=id).first()
+        print(user)
+        user.is_Admin = True
+        db.session.commit()
+        logThis("Made Admin", current_user.username, current_user.id, user.username, user.id)
+        flash(user.username + ' is now an Admin')
+    else:
+        flash('You need to be admin to do that!')
+    return redirect(url_for('profile'))
+
+
+application.route("/revokeAdmin/<id>")
+@login_required
+def revokeAdmin(id):
+    if current_user.is_Admin:
+        user = Users.query.filter_by(id=id).first()
+        print(user)
+        user.is_Admin = False
+        db.session.commit()
+        logThis("Revoked Admin", current_user.username, current_user.id, user.username, user.id)
+        flash(user.username + ' is no longer an Admin')
+    else:
+        flash('You need to be admin to do that!')
+    return redirect(url_for('profile'))
 
 
 @application.route("/saveRecipe/<id>")
@@ -180,7 +211,6 @@ def saveRecipe(id):
     user.savedRecipes.append(recipe)
     db.session.commit()
     flash('Recipe Saved')
-
     return redirect(url_for('index'))
 
     

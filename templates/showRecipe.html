@@ -11,10 +11,15 @@
                     <img class="recipeImage" src="{{ url_for('static', filename=recipe.imageURL) }}">
                 </div>
                 <div class="col-6">
-                    <h2>{{recipe.title}}</h2>
+                    <div class="row">
+                        <h2 class="col-6">{{recipe.title}}</h2>
+                        <span class="prepTimeTitle col-3">Prep Time:<br><span class="prepTime">{{recipe.prepTime}}</span></span>
+                        <span class="cookTimeTitle col-3">Cook Time:<br><span class="cookTime">{{recipe.cookTime}}</span></span>
+
+                    </div>
                     
                     <div class="row recipeIngredients">
-                        <p>Ingredients:</p>
+                        <p class="recipeIngredientsTitle">Ingredients:</p>
                         {% for ingredient in recipe.ingredients %}
                             <p class="col-6">- {{ ingredient.name }}</p>
                         {% endfor %}

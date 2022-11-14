@@ -386,3 +386,51 @@ th {
     font-size: 8px;
     color:rgba(0, 0, 0, 0.562)
 }
+
+.userContainer {
+    margin-top: 80px;
+}
+
+.tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 20px auto;
+    letter-spacing: 0.5px;
+}
+
+.tg td {
+    border-color: rgba(0, 0, 0, 0.1);
+    border-style: solid;
+    border-width: 1px;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 20px;
+    word-break: normal;
+    letter-spacing: 1px;
+}
+
+.tg th {
+    border-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
+    border-style: solid;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    font-size: 14px;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 10px 10px;
+    word-break: normal;
+}
+
+.mbsc-eventcalendar {
+    min-height: 400px !important;
+    overflow: visible !important;
+}
+
+.recipeIngredientsTitle, .prepTimeTitle, .cookTimeTitle{
+    font-weight: 800;
+}
+
+.prepTime, .cookTime {
+    font-weight: 400;
+}

@@ -1,21 +1,77 @@
-<!DOCTYPE html>
-<html>
-    {% include ['head.html'] %}
-    <body>
-        
-        {% include ['navbar.html'] %}
-        {% include ['confirmModal.html'] %}
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <center><h3>Your Profile</h3></center>
+<!doctype html>
+<html lang="en">
+{% include ['head.html'] %}
+
+<body>
+    {% include ['navbar.html'] %}
+    {% include ['changePasswordModal.html'] %}
+    <div class="container userContainer">
+        <div class="row content_profile">
+            <div class="col-8">
+                <h1>{{ user.username }}'s profile</h1>
+                
+                <div class="row recipeIngredients">
+                    <p>Ingredients:</p>
                 </div>
             </div>
+            <div class="col-4">
+                <a class="btn btn-info changeEmail">Change Email</a>
+
+                <a class="btn btn-danger changePassword">Change Password</a>
+            </div>
+            <div class="col-12">
+                <h3 class="profile-savedRecipeTitle">Saved Recipes</h3>
+            </div>
         </div>
+        {% if user.is_Admin %}
+            <hr class="hrSpacer">
+            <div class="row userList">
+                <center>
+                    <h3>User List</h3>
+                </center>
+                <table class="tg">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Saved Recipes</th>
+                            <th>Shopping List Items:</th>
+                            <th>Admin Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for each in user_list %}
+                        <a class='btn btn-light user-revokeAdmin' href="{{ url_for('makeAdmin', id=each.id) }}">Revoke Admin</a>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+                            <tr class="user-row">
+                                <td><input type="checkbox" name="userCheckbox" class="userCheckbox"></td>
+                                <td class="user-id">{{ each.id }}</td>
+                                <td class="user-username">{{ each.username }}</td>
+                                <td class="user-email">{{ each.email }}</td>
+                                <td class="user-savedRecipes">{{ each.savedRecipes|length }}</td>
+                                <td class="user-shoppingList">{{ each.shoppingList|length }}</td>
+                                <td class="user-isAdmin">{{ each.is_Admin }}
+                                    <a class='btn btn-light user-makeAdmin' href="{{ url_for('makeAdmin', id=each.id) }}">Make Admin</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
 
-    </body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+
+</body>
+
 </html>
