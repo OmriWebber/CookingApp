@@ -3,6 +3,7 @@ from flask_login import LoginManager, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from flask_ckeditor import CKEditor
+from flask_cdn import CDN
 import os, json, pymysql
 
 from models import *
@@ -16,10 +17,10 @@ application = Flask(__name__)
 application.secret_key = 'dev'
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+application.config['CDN_DOMAIN'] = 'dk2cs70wwok20.cloudfront.net'
 
+CDN(application)
 ckeditor = CKEditor(application)
-
-
 
 # If application detects rds database, use cloud database, if not use localhost
 if 'RDS_HOSTNAME' in os.environ:
