@@ -18,19 +18,19 @@ application.secret_key = 'dev'
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 application.config['CDN_DOMAIN'] = 'dk2cs70wwok20.cloudfront.net'
+application.config['CDN_TIMESTAMP'] = False
 
-CDN(application)
 ckeditor = CKEditor(application)
 
 # If application detects rds database, use cloud database, if not use localhost
 if 'RDS_HOSTNAME' in os.environ:
     print('AWS ELB ENV DETECTED')
+    CDN(application)
     RDS_Connection_String = 'mysql+pymysql://' + os.environ['RDS_USERNAME'] + ':' + os.environ['RDS_PASSWORD'] + '@' + os.environ['RDS_HOSTNAME'] + ':' + os.environ['RDS_PORT'] + '/' + os.environ['RDS_DB_NAME']
     application.config['SQLALCHEMY_DATABASE_URI'] = RDS_Connection_String
 else:
     print('LOCAL ENV DETECTED')
     application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost:3306/cookingapp"
-    # application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:CS205password@cooking-app-database.ch0or1bnad8y.ap-southeast-2.rds.amazonaws.com:3306/cooking_app_db'
 
 db.init_app(application)
 migrate.init_app(application, db)
@@ -68,7 +68,6 @@ def logThis(function, user, userID, recipe, recipeID):
 def populate():
     f = open('dataset.json')
     data = json.load(f)
-    
     for i in data:
         title = i['title']
         category = i['category']
@@ -78,22 +77,17 @@ def populate():
         prepTime = i['prepTime']
         cookTime = i['cookTime']
         recipe = Recipes(title=title,category=category,method=method,imageURL=imageURL,prepTime=prepTime,cookTime=cookTime)
-        
         ingredientsList = ingredients.split("\n")
         for ingredientName in ingredientsList:
             ingredient = Ingredients(name=ingredientName)
-            recipe.ingredients.append(ingredient)
-        
-        db.session.add(recipe)
-        
-        
+            recipe.ingredients.append(ingredient)     
+        db.session.add(recipe) 
     db.session.commit()
     f.close()
 
 
 @application.route("/")
 def index():
-    
     # populate()    # Uncomment this line to populate database with test data.
     recipes=Recipes.query.all()
     return render_template("index.html", recipes=recipes, name="Cooking App", user=current_user)
