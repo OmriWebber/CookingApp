@@ -1,6 +1,7 @@
+
 @font-face {
     font-family: AfterNight;
-    src: url('../fonts/AfterNight.ttf');
+    src: url('https://fonts.cdnfonts.com/css/after-night');
 }
 
 .navbar {
@@ -20,7 +21,7 @@
 
 .navbar-brand {
     font-size: 40px;
-    font-family: AfterNight;
+    font-family: 'After Night', sans-serif;
     color: black;
     transition: all 0.1s ease-in;
 }
@@ -89,7 +90,7 @@ h3 {
 }
 
 h1,h2,h3,h4,h5 {
-    font-family: AfterNight;
+    font-family: 'After Night', sans-serif;
 }
 
 .action-buttons .btn {
@@ -314,7 +315,7 @@ th {
     margin-top: 100px;
 }
 
-.profile-viewShoppingList {
+.profile-viewShoppingList, .profile-viewAllSavedRecipes {
     margin-top: 20px;
 }
 
