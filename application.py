@@ -92,7 +92,8 @@ def populate():
 
 @application.route("/")
 def index():
-    # populate()
+    
+    # populate()    # Uncomment this line to populate database with test data.
     recipes=Recipes.query.all()
     return render_template("index.html", recipes=recipes, name="Cooking App", user=current_user)
 
