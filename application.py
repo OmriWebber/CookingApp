@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, jsonify, Markup, url_for, flash
 from flask_login import LoginManager, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_migrate import Migrate, upgrade, migrate
 from werkzeug.utils import secure_filename
 from models import *
 from flask_ckeditor import CKEditor
@@ -36,6 +36,7 @@ db.init_app(application)
 migrate = Migrate(application, db)
 
 migrate()
+upgrade()
 
 # Init Login Manager
 login_manager = LoginManager()
