@@ -35,6 +35,8 @@ else:
 db.init_app(application)
 migrate = Migrate(application, db)
 
+migrate()
+
 # Init Login Manager
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
