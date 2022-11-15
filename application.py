@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, redirect, jsonify, Markup, url_for, flash
 from flask_login import LoginManager, login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate, upgrade, migrate
 from werkzeug.utils import secure_filename
-from models import *
 from flask_ckeditor import CKEditor
 import os, json, pymysql
+
+from models import *
 
 pymysql.install_as_MySQLdb()
 
@@ -28,15 +28,11 @@ if 'RDS_HOSTNAME' in os.environ:
     application.config['SQLALCHEMY_DATABASE_URI'] = RDS_Connection_String
 else:
     print('LOCAL ENV DETECTED')
-    # application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost:3306/cookingapp"
-    application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:CS205password@cooking-app-database.ch0or1bnad8y.ap-southeast-2.rds.amazonaws.com:3306/cooking_app_db'
-    
-    
-db.init_app(application)
-migrate = Migrate(application, db)
+    application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost:3306/cookingapp"
+    # application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:CS205password@cooking-app-database.ch0or1bnad8y.ap-southeast-2.rds.amazonaws.com:3306/cooking_app_db'
 
-migrate()
-upgrade()
+db.init_app(application)
+migrate.init_app(application, db)
 
 # Init Login Manager
 login_manager = LoginManager()
@@ -170,8 +166,17 @@ def deleteRecipe(id):
 def profile():
     skip = Users.query.filter(Users.id.in_([current_user.id]))
     users = Users.query.except_(skip).all()
+    
+    savedRecipes = current_user.savedRecipes
+    userRecipes = []
+    for recipe in savedRecipes:
+        recipe = db.session.query(Recipes).filter_by(id = recipe.RecipeID).all()
+        userRecipes += recipe
+        
+    shoppinglist = current_user.shoppingList
+    
     print(users)
-    return render_template('profile.html', user=current_user, user_list=users, name="Cooking App")
+    return render_template('profile.html', user=current_user, shopping_list=shoppinglist, user_recipes=userRecipes, user_list=users, name="Cooking App")
 
 
 @application.route("/makeAdmin/<id>")
@@ -189,7 +194,7 @@ def makeAdmin(id):
     return redirect(url_for('profile'))
 
 
-application.route("/revokeAdmin/<id>")
+@application.route("/revokeAdmin/<id>")
 @login_required
 def revokeAdmin(id):
     if current_user.is_Admin:
@@ -218,6 +223,22 @@ def saveRecipe(id):
         db.session.commit()
         flash('Recipe Saved')
     return redirect(url_for('showRecipe', id=id))
+
+@application.route("/unsaveRecipe/<id>")
+@login_required
+def unsaveRecipe(id):
+    user = Users.query.filter_by(id=current_user.id).first()
+    unsaveRecipe = savedUserRecipes.query.filter_by(userID=user.id, RecipeID=id).first()
+    if not unsaveRecipe:
+        flash('Recipe Not Saved')
+        print(unsaveRecipe)
+    else:
+        user.savedRecipes.remove(unsaveRecipe)
+        db.session.commit()
+        recipe = Recipes.query.filter_by(id=unsaveRecipe.RecipeID).first()
+        flashmsg = 'Removed ' + recipe.title + ' from saved recipes.'
+        flash(flashmsg)
+    return redirect(url_for('profile'))
 
     
 @application.route("/savedRecipes")
@@ -311,7 +332,24 @@ def addToShoppingList(ingredientIDs):
     
     flash('Ingredients added to shopping list')
     db.session.commit()
-    return redirect(url_for('index'))
+    return redirect(url_for('showShoppingList'))
+
+
+@application.route("/removeFromShoppingList/<id>")
+@login_required
+def removeFromShoppingList(id):
+    user = Users.query.filter_by(id=current_user.id).first()
+    shoppingListItem = shoppingList.query.filter_by(id=id).first()
+    if shoppingListItem:
+        user.shoppingList.remove(shoppingListItem)
+        db.session.commit()
+        flashmsg = 'Removed ' + shoppingListItem.ingredient + ' from shopping list'
+        flash(flashmsg)
+    else:
+        flashmsg = 'Ingredient not Found'
+        flash(flashmsg)
+    return redirect(url_for('showShoppingList'))
+
 
 @application.route("/shoppingList")
 @login_required

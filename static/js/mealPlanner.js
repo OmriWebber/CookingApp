@@ -282,10 +282,22 @@ $(function () {
         tempMeal.notes = recipeID;
       });
 
-    searchResults = $('#searchResults');
-    recipes = $(searchResults).find('.col');
     $('#meal-name-input').keyup(function(){
-        console.log('test');
+        var input,filter,searchResults,searchResultsItems,recipeTitle;
+        input = $('#meal-name-input');
+        console.log(input[0].value);
+        searchResults = document.getElementById("searchResults");
+        searchResultsItems = searchResults.getElementsByClassName("recipe");
+        filter = input[0].value.toUpperCase();
+
+        for(let i = 0; i < searchResultsItems.length; i++) {
+            recipeTitle = searchResultsItems[i].getElementsByClassName("recipeTitle")[0];
+            if(recipeTitle.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                $(searchResultsItems[i]).show();
+            } else {
+                $(searchResultsItems[i]).hide();
+            }
+        }
     });
     
 });

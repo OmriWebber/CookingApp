@@ -7,3 +7,18 @@
 [2022-11-06 21:15:33.360939] omri:1 deleted actual test:6
 [2022-11-11 23:30:11.679747] omri:1 deleted testtest:3
 [2022-11-14 16:46:09.525102] omri:1 Made Admin test:2
+[2022-11-15 13:26:24.695591] omri:1 Revoked Admin test:2
+[2022-11-15 13:26:26.168496] omri:1 Made Admin test:2
+[2022-11-15 13:26:27.195712] omri:1 Revoked Admin test:2
+[2022-11-15 13:26:28.032358] omri:1 Made Admin test:2
+[2022-11-15 13:26:28.713975] omri:1 Revoked Admin test:2
+[2022-11-15 13:26:29.447102] omri:1 Made Admin test:2
+[2022-11-15 13:26:30.038705] omri:1 Revoked Admin test:2
+[2022-11-15 13:26:30.839607] omri:1 Made Admin test:2
+[2022-11-15 13:26:31.772770] omri:1 Revoked Admin test:2
+[2022-11-15 13:26:33.897538] omri:1 Made Admin test:2
+[2022-11-15 13:26:34.528148] omri:1 Revoked Admin test:2
+[2022-11-15 13:26:36.193241] omri:1 Made Admin test:2
+[2022-11-15 13:26:37.478465] omri:1 Revoked Admin test:2
+[2022-11-15 13:50:25.248769] omri:1 Made Admin test:2
+[2022-11-15 13:50:26.263429] omri:1 Revoked Admin test:2

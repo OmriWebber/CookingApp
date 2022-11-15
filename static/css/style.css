@@ -249,6 +249,11 @@ th {
     animation: 1s ease 0s 1 slideInFromLeft;
 }
 
+#viewRecipe {
+    width: 80%;
+    margin-bottom: 20px;
+}
+
 .shoppingList .ingredient {
     width: 100%;
     margin: 10px;
@@ -268,12 +273,49 @@ th {
     width: 100px;
 }
 
-.markUnDone {
-    display: none;
+.shoppingListChecked {
+    background-color: rgba(0, 0, 0, 0.014);
 }
 
-.markDone, .markUnDone {
+.shoppingListChecked p {
+    text-decoration: line-through;
+}
+
+.shoppingListChecked .markDone {
+    text-decoration: line-through;
+
+}
+
+.deleteFromShoppingList {
+    padding-right:10px;
+    color: red;
+}
+
+.deleteFromShoppingList:hover {
+    padding-right:10px;
+    color: rgb(163, 0, 0);
+}
+
+.markDone{
     float: right;
+}
+
+
+.profile-shoppingList {
+    max-height: 500px;
+    overflow-y:scroll;
+}
+
+.shoppingListIngredient {
+    text-align: left;
+}
+
+.hrSpacer {
+    margin-top: 100px;
+}
+
+.profile-viewShoppingList {
+    margin-top: 20px;
 }
 
 @keyframes slideInFromLeft {
@@ -433,4 +475,21 @@ th {
 
 .prepTime, .cookTime {
     font-weight: 400;
+}
+
+.profile-savedRecipe {
+    padding: 5px 5px;
+    background-color: rgba(0, 0, 0, 0.041);
+    margin: 8px;
+}
+
+.profile-savedRecipe .recipeTitle {
+    text-align: left;
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
+
+.deleteSavedRecipe {
+    margin-top: 10px;
+    color: red;
 }

@@ -10,18 +10,51 @@
             <div class="col-8">
                 <h1>{{ user.username }}'s profile</h1>
                 
-                <div class="row recipeIngredients">
-                    <p>Ingredients:</p>
-                </div>
             </div>
             <div class="col-4">
                 <a class="btn btn-info changeEmail">Change Email</a>
 
                 <a class="btn btn-danger changePassword">Change Password</a>
             </div>
-            <div class="col-12">
-                <h3 class="profile-savedRecipeTitle">Saved Recipes</h3>
+            <div class="row">
+                <div class="col-6">
+                    <center>
+                        <h3 class="profile-savedRecipeTitle">Saved Recipes</h3>
+                        <div class="profile-savedRecipes">
+                            {% for recipe in user_recipes %}
+                                {% if loop.index > 5 %}
+
+                                {% else %}
+                                    <div class="row profile-savedRecipe">
+                                        <a class="col-1" href="{{ url_for('unsaveRecipe', id=recipe.id) }}">
+                                            <i class="deleteSavedRecipe fa fa-times"></i>
+                                        </a>
+                                        <p class="col-7 recipeTitle">{{recipe.title}}</p>
+                                        <a class="col-4 btn btn-light float-right" href="{{ url_for('showRecipe', id=recipe.id) }}">View Recipe</a>
+                                    </div>
+                                {% endif %}
+                                
+                            {% endfor %}
+                            <a class="profile-viewAllSavedRecipes btn btn-light" href="{{ url_for('savedRecipes') }}">View all saved recipes</a>
+
+
+                        </div>
+                    </center>
+                </div>
+                <div class="col-6">
+                    <center>
+                        <h3 class="profile-shoppingListTitle">Shopping List</h3>
+                        <div class="profile-shoppingList">
+                            {% for ingredient in shopping_list %}
+                                <p class="shoppingListIngredient">-  {{ ingredient }}</p>
+                            {% endfor %}
+                        </div>
+                        <a class="profile-viewShoppingList btn btn-light" href="{{ url_for('showShoppingList') }}">View Shopping List</a>
+
+                    </center>
+                </div>
             </div>
+            
         </div>
         {% if user.is_Admin %}
             <hr class="hrSpacer">
@@ -44,7 +77,6 @@
                     <tbody>
                         
                         {% for each in user_list %}
-                        <a class='btn btn-light user-revokeAdmin' href="{{ url_for('makeAdmin', id=each.id) }}">Revoke Admin</a>
 
                             <tr class="user-row">
                                 <td><input type="checkbox" name="userCheckbox" class="userCheckbox"></td>
@@ -55,6 +87,7 @@
                                 <td class="user-shoppingList">{{ each.shoppingList|length }}</td>
                                 <td class="user-isAdmin">{{ each.is_Admin }}
                                     <a class='btn btn-light user-makeAdmin' href="{{ url_for('makeAdmin', id=each.id) }}">Make Admin</a>
+                                    <a class='btn btn-light user-revokeAdmin' href="{{ url_for('revokeAdmin', id=each.id) }}">Revoke Admin</a>
                                 </td>
                             </tr>
                         {% endfor %}

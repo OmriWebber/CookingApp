@@ -3,8 +3,10 @@ from datetime import datetime
 from sqlalchemy import Column, ForeignKey, Integer, Table, String, Boolean, Text, DateTime
 from sqlalchemy.orm import declarative_base, relationship
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 db = SQLAlchemy()
+migrate = Migrate()
 
 # Users Table Model
 class Users(UserMixin, db.Model):
