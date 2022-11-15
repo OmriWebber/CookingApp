@@ -23,12 +23,13 @@ ckeditor = CKEditor(application)
 
 # If application detects rds database, use cloud database, if not use localhost
 if 'RDS_HOSTNAME' in os.environ:
-    application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password@cooking-app-database.ch0or1bnad8y.ap-southeast-2.rds.amazonaws.com:3306/cooking_app_db'
+    print('AWS ELB ENV DETECTED')
+    RDS_Connection_String = 'mysql+pymysql://' + os.environ['RDS_USERNAME'] + ':' + os.environ['RDS_PASSWORD'] + '@' + os.environ['RDS_HOSTNAME'] + ':' + os.environ['RDS_PORT'] + '/' + os.environ['RDS_DB_NAME']
+    application.config['SQLALCHEMY_DATABASE_URI'] = RDS_Connection_String
 else:
     print('LOCAL ENV DETECTED')
-    application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost:3306/cookingapp"
-    # application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password@cooking-app-database.ch0or1bnad8y.ap-southeast-2.rds.amazonaws.com:3306/cooking_app_db'
-    # application.config['SQLALCHEMY_DATABASE_URI'] = RDS_Connection_String
+    # application.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost:3306/cookingapp"
+    application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:CS205password@cooking-app-database.ch0or1bnad8y.ap-southeast-2.rds.amazonaws.com:3306/cooking_app_db'
     
     
 db.init_app(application)
@@ -204,11 +205,16 @@ def revokeAdmin(id):
 @login_required
 def saveRecipe(id):
     user = Users.query.filter_by(id=current_user.id).first()
-    recipe = savedUserRecipes(RecipeID=id)
-    user.savedRecipes.append(recipe)
-    db.session.commit()
-    flash('Recipe Saved')
-    return redirect(url_for('index'))
+    saveRecipe = savedUserRecipes(userID=user.id, RecipeID=id)
+    checkIfExists = savedUserRecipes.query.filter_by(userID=user.id, RecipeID=saveRecipe.RecipeID).first()
+    if checkIfExists:
+        flash('Recipe Already Saved')
+        print(checkIfExists)
+    else:
+        user.savedRecipes.append(saveRecipe)
+        db.session.commit()
+        flash('Recipe Saved')
+    return redirect(url_for('showRecipe', id=id))
 
     
 @application.route("/savedRecipes")
