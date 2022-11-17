@@ -84,6 +84,38 @@ def populate():
         db.session.add(recipe) 
     db.session.commit()
     f.close()
+    
+def reverse_readline(filename, buf_size=8192):
+    # A generator that returns the lines of a file in reverse order
+    with open(filename) as fh:
+        segment = None
+        offset = 0
+        fh.seek(0, os.SEEK_END)
+        file_size = remaining_size = fh.tell()
+        while remaining_size > 0:
+            offset = min(file_size, offset + buf_size)
+            fh.seek(file_size - offset)
+            buffer = fh.read(min(remaining_size, buf_size))
+            remaining_size -= buf_size
+            lines = buffer.split('\n')
+            # The first line of the buffer is probably not a complete line so
+            # we'll save it and append it to the last line of the next buffer
+            # we read
+            if segment is not None:
+                # If the previous chunk starts right from the beginning of line
+                # do not concat the segment to the last line of new chunk.
+                # Instead, yield the segment first 
+                if buffer[-1] != '\n':
+                    lines[-1] += segment
+                else:
+                    yield segment
+            segment = lines[0]
+            for index in range(len(lines) - 1, 0, -1):
+                if lines[index]:
+                    yield lines[index]
+        # Don't yield None if the file was empty
+        if segment is not None:
+            yield segment
 
 
 @application.route("/")
@@ -171,15 +203,10 @@ def deleteRecipe(id):
 def profile():
     skip = Users.query.filter_by(id=current_user.id).first()
     users = Users.query.all()
-    
-    with open('log.txt') as f:
-        f.seek(0, os.SEEK_END) # go to end of file
-        if f.tell(): # if current position is truish (i.e != 0)
-            f.seek(0) # rewind the file for later use 
-            logs = [next(f) for x in range(20)]
-
-        else:
-            logs = 'Log File Empty'
+        
+    logs = []
+    for line in reversed(list(open("log.txt"))):
+        logs.append(line.rstrip())
 
     savedRecipes = current_user.savedRecipes
     userRecipes = []

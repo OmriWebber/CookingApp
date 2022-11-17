@@ -102,12 +102,14 @@
                     <h3>Logs</h3>
                     <p>Last 20 Lines</p>
                 </center>
-                {% if logs == 'Log File Empty' %}
-                    <p>{{logs}}</p>
-                {% else %}
+                {% if logs %}
                     {% for log in logs %}
-                        <p>{{log}}</p>
+                        {% if not loop.index > 20 %}
+                            <p>{{ log }}</p>
+                        {% endif %}
                     {% endfor %}
+                {% else %}
+                    <p>Log File Empty</p>
                 {% endif %}
             </div>
         {% endif %}
