@@ -5,8 +5,7 @@ function searchFunction() {
     filter = input.value.toUpperCase();
     recipeGrid = document.getElementById("recipeGrid");
     recipeGridCards = recipeGrid.getElementsByClassName('col-md-4');
-    
-    console.log(recipeGrid);
+
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < recipeGridCards.length; i++) {
       recipeTitle = recipeGridCards[i].getElementsByClassName("recipeTitle")[0];
