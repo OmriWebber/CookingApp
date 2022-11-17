@@ -172,8 +172,6 @@ def profile():
     skip = Users.query.filter_by(id=current_user.id).first()
     users = Users.query.all()
     
-    logs = 'test'
-    
     with open('log.txt') as f:
         f.seek(0, os.SEEK_END) # go to end of file
         if f.tell(): # if current position is truish (i.e != 0)
