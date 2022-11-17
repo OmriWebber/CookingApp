@@ -222,7 +222,7 @@ def profile():
 @application.route("/makeAdmin/<id>")
 @login_required
 def makeAdmin(id):
-    if not current_user.is_Admin:
+    if current_user.is_Admin:
         user = Users.query.filter_by(id=id).first()
         print(user)
         user.is_Admin = True
