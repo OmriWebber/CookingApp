@@ -20,6 +20,13 @@ application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 application.config['CDN_DOMAIN'] = 'dk2cs70wwok20.cloudfront.net'
 application.config['CDN_TIMESTAMP'] = False
 
+
+from flask_cdn import CDN
+
+application.config['CDN_DOMAIN'] = 'dk2cs70wwok20.cloudfront.net'
+CDN(application)
+
+
 ckeditor = CKEditor(application)
 
 # If application detects rds database, use cloud database, if not use localhost
@@ -107,6 +114,7 @@ def createRecipe():
         count=request.form.get("count")
         imageURLforDB='img/recipeImages/default.jpg'
         
+        # Image Handling
         if 'recipeImage' not in request.files:
             print("No file part")
         file=request.files['recipeImage']
@@ -118,20 +126,28 @@ def createRecipe():
             imageURLforDB = os.path.join('img/recipeImages/', filename)
             file.save(imageURL)
         
-        recipe = Recipes(title=title,method=method,category=category,imageURL=imageURLforDB,servings=servings,prepTime=prepTime,cookTime=cookTime)
+        # Creating Recipe Object
+        recipe = Recipes(title=title,
+                         method=method,
+                         category=category,
+                         imageURL=imageURLforDB,
+                         servings=servings,
+                         prepTime=prepTime,
+                         cookTime=cookTime)
         
+        # Populating Recipe with user submitted ingredients
         for x in range(int(count)):
             ingredientIdentifier = 'ingredient-' + str(x+1)
             ingredientName = request.form.get(ingredientIdentifier)
             ingredient = Ingredients(name=ingredientName)
             recipe.ingredients.append(ingredient)
 
+        # Adding and commiting new recipe to database
         db.session.add(recipe)
         db.session.commit()
         flash('Recipe Created.')
         return redirect(url_for('index'))
-    recipes=Recipes.query.all()
-    return render_template("createRecipe.html", recipes=recipes, name="Cooking App", user=current_user)
+    return render_template("createRecipe.html", name="Cooking App", user=current_user)
 
 
 @application.route("/showRecipe/<id>")
@@ -163,6 +179,9 @@ def profile():
     skip = Users.query.filter_by(id=current_user.id).first()
     users = Users.query.all()
     
+    with open('log.txt') as f:
+        logs = [next(f) for x in range(20)]
+    
     savedRecipes = current_user.savedRecipes
     userRecipes = []
     for recipe in savedRecipes:
@@ -172,13 +191,13 @@ def profile():
     shoppinglist = current_user.shoppingList
     
     print(users)
-    return render_template('profile.html', user=current_user, shopping_list=shoppinglist, user_recipes=userRecipes, user_list=users, skip=skip, name="Cooking App")
+    return render_template('profile.html', user=current_user, logs=logs, shopping_list=shoppinglist, user_recipes=userRecipes, user_list=users, skip=skip, name="Cooking App")
 
 
 @application.route("/makeAdmin/<id>")
 @login_required
 def makeAdmin(id):
-    if current_user.is_Admin:
+    if not current_user.is_Admin:
         user = Users.query.filter_by(id=id).first()
         print(user)
         user.is_Admin = True

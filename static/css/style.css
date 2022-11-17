@@ -30,6 +30,10 @@
     color: grey;
 }
 
+.navbar .container .collapse {
+    background-color: gray;
+}
+
 body {
     font-family: Montserrat;
 }

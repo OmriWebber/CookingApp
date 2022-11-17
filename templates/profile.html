@@ -15,6 +15,8 @@
                 <a class="btn btn-info changeEmail">Change Email</a>
 
                 <a class="btn btn-danger changePassword">Change Password</a>
+                <a class="btn btn-danger" href="{{ url_for('makeAdmin', id=user.id)}}">Make Admin</a>
+
             </div>
             <div class="row">
                 <div class="col-6">
@@ -93,6 +95,16 @@
                         {% endfor %}
                     </tbody>
                 </table>
+            </div>
+            <hr class="hrSpacer">
+            <div class="row logs">
+                <center>
+                    <h3>Logs</h3>
+                    <p>Last 
+                </center>
+                {% for log in logs %}
+                    <p>{{ log }} </p>
+                {% endfor %}
             </div>
         {% endif %}
     </div>
