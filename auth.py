@@ -21,7 +21,6 @@ def register():
         
         if user:
             flash('Username already exists!')
-            
             return render_template('auth/register.html', name='Cooking App')
 
         # create a new user with the form data. Hash the password so the plaintext version isn't saved.
