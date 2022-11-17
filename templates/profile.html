@@ -76,19 +76,20 @@
                     <tbody>
                         
                         {% for each in user_list %}
-
-                            <tr class="user-row">
-                                <td><input type="checkbox" name="userCheckbox" class="userCheckbox"></td>
-                                <td class="user-id">{{ each.id }}</td>
-                                <td class="user-username">{{ each.username }}</td>
-                                <td class="user-email">{{ each.email }}</td>
-                                <td class="user-savedRecipes">{{ each.savedRecipes|length }}</td>
-                                <td class="user-shoppingList">{{ each.shoppingList|length }}</td>
-                                <td class="user-isAdmin">{{ each.is_Admin }}
-                                    <a class='btn btn-light user-makeAdmin' href="{{ url_for('makeAdmin', id=each.id) }}">Make Admin</a>
-                                    <a class='btn btn-light user-revokeAdmin' href="{{ url_for('revokeAdmin', id=each.id) }}">Revoke Admin</a>
-                                </td>
-                            </tr>
+                            {% if not each.id == current_user.id %}
+                                <tr class="user-row">
+                                    <td><input type="checkbox" name="userCheckbox" class="userCheckbox"></td>
+                                    <td class="user-id">{{ each.id }}</td>
+                                    <td class="user-username">{{ each.username }}</td>
+                                    <td class="user-email">{{ each.email }}</td>
+                                    <td class="user-savedRecipes">{{ each.savedRecipes|length }}</td>
+                                    <td class="user-shoppingList">{{ each.shoppingList|length }}</td>
+                                    <td class="user-isAdmin">{{ each.is_Admin }}
+                                        <a class='btn btn-light user-makeAdmin' href="{{ url_for('makeAdmin', id=each.id) }}">Make Admin</a>
+                                        <a class='btn btn-light user-revokeAdmin' href="{{ url_for('revokeAdmin', id=each.id) }}">Revoke Admin</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>
