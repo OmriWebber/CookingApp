@@ -20,13 +20,6 @@ application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 application.config['CDN_DOMAIN'] = 'dk2cs70wwok20.cloudfront.net'
 application.config['CDN_TIMESTAMP'] = False
 
-
-from flask_cdn import CDN
-
-application.config['CDN_DOMAIN'] = 'dk2cs70wwok20.cloudfront.net'
-CDN(application)
-
-
 ckeditor = CKEditor(application)
 
 # If application detects rds database, use cloud database, if not use localhost
@@ -179,9 +172,17 @@ def profile():
     skip = Users.query.filter_by(id=current_user.id).first()
     users = Users.query.all()
     
-    with open('log.txt') as f:
-        logs = [next(f) for x in range(20)]
+    logs = 'test'
     
+    with open('log.txt') as f:
+        f.seek(0, os.SEEK_END) # go to end of file
+        if f.tell(): # if current position is truish (i.e != 0)
+            f.seek(0) # rewind the file for later use 
+            logs = [next(f) for x in range(20)]
+
+        else:
+            logs = 'Log File Empty'
+
     savedRecipes = current_user.savedRecipes
     userRecipes = []
     for recipe in savedRecipes:
@@ -190,7 +191,6 @@ def profile():
         
     shoppinglist = current_user.shoppingList
     
-    print(users)
     return render_template('profile.html', user=current_user, logs=logs, shopping_list=shoppinglist, user_recipes=userRecipes, user_list=users, skip=skip, name="Cooking App")
 
 

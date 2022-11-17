@@ -100,11 +100,15 @@
             <div class="row logs">
                 <center>
                     <h3>Logs</h3>
-                    <p>Last 
+                    <p>Last 20 Lines</p>
                 </center>
-                {% for log in logs %}
-                    <p>{{ log }} </p>
-                {% endfor %}
+                {% if logs == 'Log File Empty' %}
+                    <p>{{logs}}</p>
+                {% else %}
+                    {% for log in logs %}
+                        <p>{{log}}</p>
+                    {% endfor %}
+                {% endif %}
             </div>
         {% endif %}
     </div>

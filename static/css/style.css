@@ -30,9 +30,15 @@
     color: grey;
 }
 
-.navbar .container .collapse {
-    background-color: gray;
+.navbar .container .collapsing, .navbar .container .show {
+    background-color: rgb(230, 230, 230);
+    padding: 10px;
 }
+
+.navbar .container .collapsing .navbar-nav, .navbar .container .show .navbar-nav {
+    text-align: center;
+}
+
 
 body {
     font-family: Montserrat;
