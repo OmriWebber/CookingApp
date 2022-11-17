@@ -9,7 +9,7 @@
             <center>
                 <h2 class="heroTag">Search for a Recipe<br>or<br>Create your own</h2><br><br>
                 <input class="btn btn-light" id="searchRecipes" onkeyup="searchFunction()" type="input" placeholder="Search for recipes..">
-                <a class="btn btn-success" href="{{ url_for('createRecipe') }}">Create a Recipe</a><br><br>
+                <a class="btn btn-success" href="{{ url_for('createRecipe') }}"><i class="fa fa-plus"></i> Create a Recipe</a><br><br>
                 <a class="btn btn-light" href="{{ url_for('savedRecipes') }}">View Saved Recipes</a>
             </center>
         </div>

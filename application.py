@@ -160,8 +160,8 @@ def deleteRecipe(id):
 @application.route("/profile")
 @login_required
 def profile():
-    skip = Users.query.filter(Users.id.in_([current_user.id]))
-    users = Users.query.except_(skip).all()
+    skip = Users.query.filter_by(id=current_user.id).first()
+    users = Users.query.all()
     
     savedRecipes = current_user.savedRecipes
     userRecipes = []
@@ -172,7 +172,7 @@ def profile():
     shoppinglist = current_user.shoppingList
     
     print(users)
-    return render_template('profile.html', user=current_user, shopping_list=shoppinglist, user_recipes=userRecipes, user_list=users, name="Cooking App")
+    return render_template('profile.html', user=current_user, shopping_list=shoppinglist, user_recipes=userRecipes, user_list=users, skip=skip, name="Cooking App")
 
 
 @application.route("/makeAdmin/<id>")
